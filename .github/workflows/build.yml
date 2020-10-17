@@ -1,51 +1,9 @@
-name: Build All
-
+name: Build ffmpeg
 on: [push]
-
 jobs:
   build:
-    name: Build for ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      matrix:
-        config:
-          - {
-              name: "Windows",
-              os: windows-latest,
-              environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-            }
-          - {
-              name: "Linux",
-              os: ubuntu-latest
-            }
-          - {
-              name: "macOS",
-              os: macos-latest
-            }
-
+    name: Build
+    runs-on: windows-latest
     steps:
-#       - name: Windows yasm
-#         if: matrix.config.os == 'windows-latest'
-#         uses: msys2/setup-msys2@v2
-#         with:
-#           update: true
-#           install: 'yasm libiconv'
-
-      - name: Windows
-        if: matrix.config.os == 'windows-latest'
-        run: |
-          vcpkg install ffmpeg:x64-windows
-
-      - name: Linux
-        if: matrix.config.os == 'ubuntu-latest'
-        run: |
-          sudo apt update
-          sudo apt install yasm
-          vcpkg install ffmpeg[avcodec]:x64-linux
-
-      - name: macOS
-        if: matrix.config.os == 'macos-latest'
-        run: |
-          brew install yasm
-          vcpkg install ffmpeg[avcodec]:x64-osx
-
+      - name: ffmpeg
+        run: vcpkg install ffmpeg
