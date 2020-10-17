@@ -31,7 +31,6 @@ jobs:
             update: true
             install: 'yasm libiconv'
 
-
       - name: Windows
         if: matrix.config.os == 'windows-latest'
         run: |
