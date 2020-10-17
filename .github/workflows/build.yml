@@ -36,4 +36,4 @@ jobs:
           brew install yasm
 
       - name: VCPKG
-        run: vcpkg install ffmpeg[avcodec]
+        run: vcpkg install ffmpeg[avcodec]:x64
