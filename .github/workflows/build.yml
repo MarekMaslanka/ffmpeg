@@ -41,6 +41,7 @@ jobs:
       - name: Windows
         if: matrix.config.os == 'windows-latest'
         run: |
+          dir
           cd FFmpeg
           ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
           make -j2
@@ -49,6 +50,7 @@ jobs:
       - name: Linux
         if: matrix.config.os == 'ubuntu-latest'
         run: |
+          ls -l
           sudo apt update
           cd FFmpeg
           ./configure --extra-libs="-lpthread -lm" --disable-all --prefix="output"
@@ -56,6 +58,7 @@ jobs:
       - name: macOS
         if: matrix.config.os == 'macos-latest'
         run: |
+          ls -l
           cd FFmpeg
           ./configure --disable-all --prefix="output"
 
