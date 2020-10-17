@@ -50,7 +50,7 @@ jobs:
         run: |
           pacman --noconfirm -Sy
           pacman --noconfirm -Sy yasm
-          pacman --noconfirm -Sy binutils make gcc
+          pacman --noconfirm -Sy binutils make gcc base-devel
           mkdir yasm && cd yasm
           curl -O https://raw.githubusercontent.com/Alexpux/MSYS2-packages/master/yasm/PKGBUILD
           curl -O https://raw.githubusercontent.com/Alexpux/MSYS2-packages/master/yasm/msysize.patch
