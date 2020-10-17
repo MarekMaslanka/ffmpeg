@@ -1,82 +1,9 @@
-name: Build All
-
+name: Build ffmpeg
 on: [push]
-
 jobs:
   build:
-    name: Build for ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      matrix:
-        config:
-          - {
-              name: "Windows",
-              os: windows-latest,
-              environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-            }
-#           - {
-#               name: "Linux",
-#               os: ubuntu-latest
-#             }
-#           - {
-#               name: "macOS",
-#               os: macos-latest
-#             }
-
+    name: Build
+    runs-on: windows-latest
     steps:
-      - name: Checkout client
-        uses: actions/checkout@v2
-        with:
-          path: ffmpeg
-          repository: FFmpeg/FFmpeg
-          ref: release/4.3
-
-#       - name: Windows yasm
-#         if: matrix.config.os == 'windows-latest'
-#         uses: msys2/setup-msys2@v2
-#         with:
-#           update: true
-#           install: 'yasm libiconv'
-
-#       - name: Windows yasm
-#         if: matrix.config.os == 'windows-latest'
-#         uses: msys2/setup-msys2@v2
-#         with:
-#           update: true
-#           install: 'yasm libiconv'
-
-      - uses: msys2/setup-msys2@v2
-      - shell: powershell
-        run: |
-          "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          msys2 -c 'pacman --noconfirm -Sy'
-          msys2 -c 'pacman --noconfirm -Sy yasm'
-          cd ffmpeg
-          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH'
-          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH && which cl.exe'
-          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH && which link.exe'
-          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH && ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"'
-          
-#       - name: Windows
-#         if: matrix.config.os == 'windows-latest'
-#         uses: msys2/setup-msys2@v2
-#         run: |
-#           C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
-#           cd ffmpeg
-#           ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
-
-      - name: Linux
-        if: matrix.config.os == 'ubuntu-latest'
-        run: |
-          ls -l
-          sudo apt update
-          sudo apt install nasm
-          cd ffmpeg
-          ./configure --extra-libs="-lpthread -lm" --disable-all --prefix="output"
-      - name: macOS
-        if: matrix.config.os == 'macos-latest'
-        run: |
-          ls -l
-          brew install nasm
-          cd ffmpeg
-          ./configure --disable-all --prefix="output"
+      - name: ffmpeg
+        run: vcpkg install ffmpeg
