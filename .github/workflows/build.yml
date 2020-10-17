@@ -1,9 +1,61 @@
-name: Build ffmpeg
+name: Build All
+
 on: [push]
+
 jobs:
   build:
-    name: Build
-    runs-on: windows-latest
+    name: Build for ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      matrix:
+        config:
+          - {
+              name: "Windows",
+              os: windows-latest,
+              environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+            }
+          - {
+              name: "Linux",
+              os: ubuntu-latest
+            }
+          - {
+              name: "macOS",
+              os: macos-latest
+            }
+
     steps:
-      - name: ffmpeg
-        run: vcpkg install ffmpeg
+      - name: Checkout client
+        uses: actions/checkout@v2
+        with:
+          path: client
+          repository: FFmpeg/FFmpeg
+          ref: release/4.3
+
+#       - name: Windows yasm
+#         if: matrix.config.os == 'windows-latest'
+#         uses: msys2/setup-msys2@v2
+#         with:
+#           update: true
+#           install: 'yasm libiconv'
+
+      - name: Windows
+        if: matrix.config.os == 'windows-latest'
+        run: |
+          cd FFmpeg
+          ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
+          make -j2
+          make install 
+
+      - name: Linux
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          cd FFmpeg
+          ./configure --extra-libs="-lpthread -lm" --disable-all --prefix="output"
+
+      - name: macOS
+        if: matrix.config.os == 'macos-latest'
+        run: |
+          cd FFmpeg
+          ./configure --disable-all --prefix="output"
+
