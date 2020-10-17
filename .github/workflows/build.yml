@@ -53,9 +53,9 @@ jobs:
           msys2 -c 'pacman --noconfirm -Sy yasm'
           cd ffmpeg
           msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH'
-          msys2 -c 'which cl.exe'
-          msys2 -c 'which link.exe'
-          msys2 -c './configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"'
+          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH && which cl.exe'
+          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH && which link.exe'
+          msys2 -c 'export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH && ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"'
           
 #       - name: Windows
 #         if: matrix.config.os == 'windows-latest'
