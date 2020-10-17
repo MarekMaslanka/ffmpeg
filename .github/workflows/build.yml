@@ -48,9 +48,11 @@ jobs:
       - uses: msys2/setup-msys2@v2
       - shell: msys2 {0}
         run: |
+          which link
           pacman --noconfirm -Sy
           pacman --noconfirm -Sy yasm
           export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH
+          which link
           cd ffmpeg
           cl.exe
           ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
