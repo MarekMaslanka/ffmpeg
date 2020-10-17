@@ -48,9 +48,9 @@ jobs:
       - uses: msys2/setup-msys2@v2
       - shell: cmd
         run: |
-          C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
-          msys2 -c 'pacman --noconfirm -Sy'
-          msys2 -c 'pacman --noconfirm -Sy yasm'
+          "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          "msys2 -c 'pacman --noconfirm -Sy'"
+          "msys2 -c 'pacman --noconfirm -Sy yasm'"
           cd ffmpeg
           msys2 -c './configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"'
           
