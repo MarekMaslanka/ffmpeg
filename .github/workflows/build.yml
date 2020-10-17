@@ -26,10 +26,10 @@ jobs:
     steps:
       - name: Windows yasm
         if: matrix.config.os == 'windows-latest'
-        - uses: msys2/setup-msys2@v2
-          with:
-            update: true
-            install: 'yasm libiconv'
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: 'yasm libiconv'
 
       - name: Windows
         if: matrix.config.os == 'windows-latest'
