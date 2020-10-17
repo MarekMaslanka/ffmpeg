@@ -24,11 +24,16 @@ jobs:
             }
 
     steps:
-      - name: Install yasm
+      - name: Linux: Install yasm
         if: matrix.config.os == 'ubuntu-latest'
         run: |
           sudo apt update
           sudo apt install yasm
+
+      - name: macOS:Install yasm
+        if: matrix.config.os == 'macos-latest'
+        run: |
+          brew install yasm
 
       - name: VCPKG
         run: vcpkg install ffmpeg[avcodec]
