@@ -46,17 +46,13 @@ jobs:
 #           install: 'yasm libiconv'
 
       - uses: msys2/setup-msys2@v2
-      - shell: msys2 {0}
+      - shell: cmd
         run: |
-          which link
-          mv /usr/bin/link /usr/bin/link2
-          pacman --noconfirm -Sy
-          pacman --noconfirm -Sy yasm
-          export PATH=$PATH:"/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/"
-          which link.exe
-          which cl.exe
+          "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          msys2 -c 'pacman --noconfirm -Sy'
+          msys2 -c 'pacman --noconfirm -Sy yasm'
           cd ffmpeg
-          ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
+          msys2 -c './configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"'
           
 #       - name: Windows
 #         if: matrix.config.os == 'windows-latest'
