@@ -49,7 +49,6 @@ jobs:
       - shell: msys2 {0}
         run: |
           pacman --noconfirm -Sy
-          pacman --noconfirm -Syu
           pacman --noconfirm -Sy yasm
           pacman --noconfirm -Sy binutils make gcc
           mkdir yasm && cd yasm
