@@ -1,0 +1,28 @@
+name: Build All
+
+on: [push]
+
+jobs:
+  build:
+    name: Build for ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      matrix:
+        config:
+          - {
+              name: "Windows",
+              os: windows-latest,
+              environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+            }
+          - {
+              name: "Linux",
+              os: ubuntu-latest
+            }
+          - {
+              name: "macOS",
+              os: macos-latest
+            }
+
+    steps:
+    - name: VCPKG
+      run: vcpkg install ffmpeg[avcodec]
