@@ -34,7 +34,7 @@ jobs:
       - name: Windows
         if: matrix.config.os == 'windows-latest'
         run: |
-          vcpkg install yasm:x64-linux
+          vcpkg install yasm:x64-windows
           vcpkg install ffmpeg[avcodec]:x64-windows
 
       - name: Linux
