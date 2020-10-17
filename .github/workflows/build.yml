@@ -24,16 +24,21 @@ jobs:
             }
 
     steps:
-      - name: Linux Install yasm
+      - name: Windows
+        if: matrix.config.os == 'windows-latest'
+        run: |
+          vcpkg install ffmpeg[avcodec]:x64-windows
+
+      - name: Linux
         if: matrix.config.os == 'ubuntu-latest'
         run: |
           sudo apt update
           sudo apt install yasm
+          vcpkg install ffmpeg[avcodec]:x64-linux
 
-      - name: macOS Install yasm
+      - name: macOS
         if: matrix.config.os == 'macos-latest'
         run: |
           brew install yasm
+          vcpkg install ffmpeg[avcodec]:x64-osx
 
-      - name: VCPKG
-        run: vcpkg install ffmpeg[avcodec]:x64
