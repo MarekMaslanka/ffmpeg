@@ -34,6 +34,9 @@ jobs:
       - name: Windows
         if: matrix.config.os == 'windows-latest'
         run: |
+          vcpkg pull
+          vcpkg update
+          vcpkg upgrade
           vcpkg install yasm:x64-windows
           vcpkg upgrade yasm:x64-windows
           vcpkg upgrade ffmpeg:x64-windows
