@@ -27,7 +27,7 @@ jobs:
       - name: Checkout client
         uses: actions/checkout@v2
         with:
-          path: client
+          path: ffmpeg
           repository: FFmpeg/FFmpeg
           ref: release/4.3
 
@@ -42,7 +42,7 @@ jobs:
         if: matrix.config.os == 'windows-latest'
         run: |
           dir
-          cd FFmpeg
+          cd ffmpeg
           ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
           make -j2
           make install 
@@ -52,13 +52,13 @@ jobs:
         run: |
           ls -l
           sudo apt update
-          cd FFmpeg
+          cd ffmpeg
           ./configure --extra-libs="-lpthread -lm" --disable-all --prefix="output"
 
       - name: macOS
         if: matrix.config.os == 'macos-latest'
         run: |
           ls -l
-          cd FFmpeg
+          cd ffmpeg
           ./configure --disable-all --prefix="output"
 
