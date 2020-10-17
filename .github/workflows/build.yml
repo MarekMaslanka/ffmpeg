@@ -48,7 +48,7 @@ jobs:
       - uses: msys2/setup-msys2@v2
       - shell: msys2 {0}
         run: |
-          pacman -S  binutils make gcc base-devel
+          pacman -S  binutils make gcc
           mkdir yasm && cd yasm
           curl -O https://raw.githubusercontent.com/Alexpux/MSYS2-packages/master/yasm/PKGBUILD
           makepkg -sri
