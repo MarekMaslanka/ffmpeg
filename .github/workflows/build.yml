@@ -52,6 +52,7 @@ jobs:
         run: |
           ls -l
           sudo apt update
+          sudo apt install nasm
           cd ffmpeg
           ./configure --extra-libs="-lpthread -lm" --disable-all --prefix="output"
 
@@ -59,6 +60,7 @@ jobs:
         if: matrix.config.os == 'macos-latest'
         run: |
           ls -l
+          brew install nasm
           cd ffmpeg
           ./configure --disable-all --prefix="output"
 
