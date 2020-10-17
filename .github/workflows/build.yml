@@ -46,8 +46,8 @@ jobs:
 #           install: 'yasm libiconv'
 
       - uses: msys2/setup-msys2@v2
-        if: matrix.config.os == 'windows-latest'
-      - run: |
+      - shell: msys2 {0}
+        run: |
           pacman --noconfirm -S --needed yasm
           /bin/bash "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           cd ffmpeg
