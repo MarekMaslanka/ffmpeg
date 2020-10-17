@@ -38,14 +38,20 @@ jobs:
 #           update: true
 #           install: 'yasm libiconv'
 
+      - name: Windows yasm
+        if: matrix.config.os == 'windows-latest'
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: 'yasm libiconv'
+
       - name: Windows
         if: matrix.config.os == 'windows-latest'
+        uses: msys2/setup-msys2@v2
         run: |
-          dir
+          C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
           cd ffmpeg
           ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
-          make -j2
-          make install 
 
       - name: Linux
         if: matrix.config.os == 'ubuntu-latest'
