@@ -24,11 +24,11 @@ jobs:
             }
 
     steps:
-      - name: YASM
-      if: matrix.config.os == 'ubuntu-latest'
-      run: |
-        sudo apt update
-        sudo apt install yasm
+      - name: Install yasm
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          sudo apt install yasm
 
       - name: VCPKG
         run: vcpkg install ffmpeg[avcodec]
