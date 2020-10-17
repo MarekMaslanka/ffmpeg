@@ -30,13 +30,7 @@ jobs:
           sudo apt update
           sudo apt install yasm
 
-      - name: Linux: Install yasm2
-        if: matrix.config.os == 'ubuntu-latest'
-        run: |
-          sudo apt update
-          sudo apt install yasm
-
-      - name: macOS:Install yasm
+      - name: macOS Install yasm
         if: matrix.config.os == 'macos-latest'
         run: |
           brew install yasm
