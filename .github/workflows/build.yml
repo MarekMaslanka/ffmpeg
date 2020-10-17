@@ -51,7 +51,7 @@ jobs:
           pacman --noconfirm -Sy
           pacman --noconfirm -Sy yasm
           find /c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/ -name cl.exe
-          export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/":$PATH
+          export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/":$PATH
           cd ffmpeg
           ./configure --target-os=win64 --arch=x86_64 --toolchain=msvc --disable-all --prefix="output"
 #       - name: Windows
