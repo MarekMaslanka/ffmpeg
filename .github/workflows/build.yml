@@ -24,7 +24,7 @@ jobs:
             }
 
     steps:
-      - name: Linux: Install yasm
+      - name: Linux Install yasm
         if: matrix.config.os == 'ubuntu-latest'
         run: |
           sudo apt update
